@@ -33,9 +33,9 @@ NetworkSettings:
   ## Node Network details are not needed when in nodeport mode / static routes are disabled / non vcenter clouds.
   #nodeNetworkList: []
   nodeNetworkList:
-     - networkName: "ls-tkg-workload"
+     - networkName: "VDS01-VLAN114-Workload"
        cidrs:
-         - 172.16.20.0/24
+         - 10.114.1.0/24
   enableRHI: false # This is a cluster wide setting for BGP peering.
   nsxtT1LR: '' # T1 Logical Segment mapping for backend network. Only applies to NSX-T cloud.
   bgpPeerLabels: [] # Select BGP peers using bgpPeerLabels, for selective VsVip advertisement.
@@ -44,8 +44,8 @@ NetworkSettings:
   #   - peer2
   #vipNetworkList: [] # Network information of the VIP network. Multiple networks allowed only for AWS Cloud.
   vipNetworkList:
-   - networkName: ls-lb-vip
-     cidr: 172.16.21.0/24
+   - networkName: "VDS01-VLAN112-VIP"
+     cidr: 10.112.1.0/24
 
 ### This section outlines all the knobs  used to control Layer 7 loadbalancing settings in AKO.
 L7Settings:
@@ -66,7 +66,7 @@ ControllerSettings:
   serviceEngineGroupName: Default-Group   # Name of the ServiceEngine Group.
   controllerVersion: 20.1.6   # The controller API version
   cloudName: Default-Cloud   # The configured cloud name on the Avi controller.
-  controllerHost: 'avic.lab01.one' # IP address or Hostname of Avi Controller
+  controllerHost: '10.115.1.51' # IP address or Hostname of Avi Controller
   tenantsPerCluster: 'false' # If set to true, AKO will map each kubernetes cluster uniquely to a tenant in Avi
   tenantName: admin   # Name of the tenant where all the AKO objects will be created in AVI. // Required only if tenantsPerCluster is set to True
 
@@ -91,7 +91,7 @@ rbac:
 
 avicredentials:
   username: 'admin'
-  password: 'VMware1!SDDC'
+  password: 'VMware1!'
   certificateAuthorityData:
 
 
