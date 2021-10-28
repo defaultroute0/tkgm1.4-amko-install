@@ -15,21 +15,21 @@ federation:
     repository: projects.registry.vmware.com/ako/amko-federator
     pullPolicy: IfNotPresent
   # cluster context where AMKO is going to be deployed
-  currentCluster: 'tkgm-guest1'
+  currentCluster: 'tkgm-guest1-admin@tkgm-guest1'
   # Set to true if AMKO on this cluster is the leader
   currentClusterIsLeader: true
   # member clusters to federate the GSLBConfig and GDP objects on, if the
   # current cluster context is part of this list, the federator will ignore it
   memberClusters:
-  - tkgm-guest1
-  - tkgm-guest2
+  - tkgm-guest1-admin@tkgm-guest1
+  - tkgm-guest2-admin@tkgm-guest2
 
 configs:
-  gslbLeaderController: 'avic.lab01.one'
+  gslbLeaderController: '10.115.1.52'
   controllerVersion: 20.1.6
   memberClusters:
-  - clusterContext: tkgm-guest1
-  - clusterContext: tkgm-guest2
+  - clusterContext: tkgm-guest1-admin@tkgm-guest1
+  - clusterContext: tkgm-guest2-admin@tkgm-guest2
   refreshInterval: 1800
   logLevel: INFO
   # Set the below flag to true if a different GSLB Service fqdn is desired than the ingress/route's
@@ -46,7 +46,7 @@ configs:
 
 gslbLeaderCredentials:
   username: 'admin'
-  password: 'VMware1!SDDC'
+  password: 'VMware1!'
 
 globalDeploymentPolicy:
   # appSelector takes the form of:
@@ -67,8 +67,8 @@ globalDeploymentPolicy:
   # list of all clusters that the GDP object will be applied to, can take any/all values
   # from .configs.memberClusters
   matchClusters:
-  - cluster: tkgm-guest1
-  - cluster: tkgm-guest2
+  - cluster: tkgm-guest1-admin@tkgm-guest1
+  - cluster: tkgm-guest2-admin@tkgm-guest2
 
   # list of all clusters and their traffic weights, if unspecified, default weights will be
   # given (optional). Uncomment below to add the required trafficSplit.
